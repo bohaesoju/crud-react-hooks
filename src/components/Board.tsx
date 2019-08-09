@@ -21,7 +21,7 @@ class Board extends React.Component {
     render(){
         const { boards } = this.state;
         const list = boards.map((row) => {
-            row.boardNumber + row.boardWriter
+            return row.boardNumber + row.boardWriter
         });
 
         return(
