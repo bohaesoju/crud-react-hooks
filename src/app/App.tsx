@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { App1, App2 } from '../components';
-import BoardWrap from '../containers/BoardWrap.jsx';
+import BoardWrap from '../containers/BoardWrap';
 
 const App = () => {
     return(
