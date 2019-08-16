@@ -1,24 +1,28 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import BoardForm from "../components/BoardForm";
-import BoardItem from "../components/BoardItem";
+import { Dispatch } from 'redux';
+import { BoardItem, BoardForm } from "../components/";
 import '../style/style.scss';
-import rootReducer from '../reducers/index.js';
+import { rootState } from '../reducers/';
+import {board_data_remove, board_data_save, board_data_select} from "../reducers/Board";
 
 interface IProps{
-    boards: any
     selectedBoard: any
     Board: any
+    onBoardRemove(i: number): void
+    onBoardDataSelect(i: number): void
+    onBoardDataSave(e: any): void
 }
 
 class BoardWrap extends React.Component<IProps> {
 
     render(){
-        const { boards } = this.props.Board;
+        const { Board } = this.props;
+        const { onBoardRemove, onBoardDataSelect, onBoardDataSave } = this.props;
 
         return(
             <div>
-                <BoardForm />
+                <BoardForm Board={ Board } onBoardDataSave={ onBoardDataSave } />
                 <table className="table">
                     <tbody>
                         <tr>
@@ -29,8 +33,8 @@ class BoardWrap extends React.Component<IProps> {
                             <td></td>
                         </tr>
                         {
-                            boards.map(row =>
-                                (<BoardItem key={ row.boardNumber } row={ row } />)
+                            Board.boards.map(row =>
+                                (<BoardItem onBoardRemove={ onBoardRemove } onBoardDataSelect={ onBoardDataSelect } key={ row.boardNumber } row={ row } />)
                             )
                         }
                     </tbody>
@@ -40,13 +44,21 @@ class BoardWrap extends React.Component<IProps> {
     }
 }
 
-const mapStateToProps = (rootReducer: any) => {
+const mapStateToProps = (rootState: rootState) => {
     return {
-        Board: rootReducer.Board
+        Board: rootState.Board
+    }
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        onBoardDataSelect: (i) => dispatch(board_data_select(i)),
+        onBoardRemove: (i) => dispatch(board_data_remove(i)),
+        onBoardDataSave: (e) => dispatch(board_data_save(e))
     }
 };
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(BoardWrap);

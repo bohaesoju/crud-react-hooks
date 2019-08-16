@@ -1,7 +1,4 @@
 import * as React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { board_data_select, board_data_remove } from '../reducers/Board';
 
 interface IProps{
     row: any
@@ -9,7 +6,7 @@ interface IProps{
     onBoardRemove(e: number): void
 }
 
-class BoardItem extends React.Component<IProps> {
+export class BoardItem extends React.Component<IProps> {
 
     handleUpdateForm = (i) => {
         this.props.onBoardDataSelect(i);
@@ -32,13 +29,3 @@ class BoardItem extends React.Component<IProps> {
         )
     }
 };
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onBoardDataSelect: (i) => dispatch(board_data_select(i)),
-    onBoardRemove: (i) => dispatch(board_data_remove(i))
-});
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(BoardItem);
