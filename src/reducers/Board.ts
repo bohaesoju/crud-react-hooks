@@ -1,3 +1,5 @@
+import { IBoard } from './Models';
+
 const BOARD_DATA_SAVE = 'BOARD_DATA_SAVE';
 const BOARD_DATA_REMOVE = 'BOARD_DATA_REMOVE';
 const BOARD_DATA_SELECT = 'BOARD_DATA_SELECT';
@@ -23,7 +25,7 @@ export const board_data_select = (boardNumber) => {
     }
 };
 
-const initialState = {
+const initialState: IBoard = {
     maxNumber: 3,
     boards: [
         {
@@ -42,7 +44,7 @@ const initialState = {
     selectedBoard: {}
 };
 
-const board = (state = initialState, action: any) => {
+const board = (state = initialState, action: any): IBoard => {
     let boards = state.boards;
     switch(action.type){
         case BOARD_DATA_SAVE:
@@ -64,7 +66,7 @@ const board = (state = initialState, action: any) => {
                         ? {...data}
                         : row),
                     selectedBoard: {}
-                }
+                };
             // }
         case BOARD_DATA_REMOVE:
             return {

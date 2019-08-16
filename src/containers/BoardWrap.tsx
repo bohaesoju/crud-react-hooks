@@ -47,5 +47,6 @@ const mapStateToProps = (rootReducer: any) => {
 };
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    null
 )(BoardWrap);
