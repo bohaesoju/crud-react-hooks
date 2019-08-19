@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-interface IProps{
-    row: any
-    onBoardDataSelect(e: number): void
-    onBoardRemove(e: number): void
-}
+// interface IProps{
+//     row: any
+//     onBoardDataSelect(e: number): void
+//     onBoardRemove(e: number): void
+// }
 
-export class BoardItem extends React.Component<IProps> {
+export class BoardItem extends React.Component {
 
     handleUpdateForm = (i) => {
         this.props.onBoardDataSelect(i);
@@ -16,11 +16,21 @@ export class BoardItem extends React.Component<IProps> {
         this.props.onBoardRemove(i)
     };
 
+    handleCheckbox = (e, i) => {
+        // console.log(e.target.checked);
+        if(e.target.checked === true){
+            this.props.onBoardDataSelect(i);
+        } else {
+            this.props.onBoardDataClear(i)
+        }
+    };
+
     render(){
         const { row } = this.props;
         return(
             <tr>
                 <td>{ row.boardNumber }</td>
+                <td><input onChange={ (e, i) => this.handleCheckbox(e, row.boardNumber) } checked={ row.checked } type="checkbox" /></td>
                 <td><a onClick={ () => this.handleUpdateForm(row.boardNumber) }>{ row.boardTitle }</a></td>
                 <td>{ row.boardWriter }</td>
                 <td>{ row.boardMakeDate.toLocaleDateString('ko-KR') }</td>

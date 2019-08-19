@@ -4,7 +4,12 @@ import { Dispatch } from 'redux';
 import { BoardItem, BoardForm } from "../components/";
 import '../style/style.scss';
 import { rootState } from '../reducers/';
-import {board_data_remove, board_data_save, board_data_select} from "../reducers/Board";
+import {
+    board_data_remove,
+    board_data_save,
+    board_data_select,
+    board_data_clear
+} from "../reducers/Board";
 
 interface IProps{
     selectedBoard: any
@@ -12,21 +17,31 @@ interface IProps{
     onBoardRemove(i: number): void
     onBoardDataSelect(i: number): void
     onBoardDataSave(e: any): void
+    onBoardDataClear(e: any): void
 }
 
 class BoardWrap extends React.Component<IProps> {
 
     render(){
         const { Board } = this.props;
-        const { onBoardRemove, onBoardDataSelect, onBoardDataSave } = this.props;
+        const {
+            onBoardRemove,
+            onBoardDataSelect,
+            onBoardDataSave,
+            onBoardDataClear
+        } = this.props;
 
         return(
             <div>
-                <BoardForm Board={ Board } onBoardDataSave={ onBoardDataSave } />
+                <BoardForm
+                    Board={ Board }
+                    onBoardDataSave={ onBoardDataSave }
+                />
                 <table className="table">
                     <tbody>
                         <tr>
                             <td>No.</td>
+                            <td>수정</td>
                             <td>Title</td>
                             <td>Name</td>
                             <td>Date</td>
@@ -34,7 +49,13 @@ class BoardWrap extends React.Component<IProps> {
                         </tr>
                         {
                             Board.boards.map(row =>
-                                (<BoardItem onBoardRemove={ onBoardRemove } onBoardDataSelect={ onBoardDataSelect } key={ row.boardNumber } row={ row } />)
+                                (<BoardItem
+                                    onBoardRemove={ onBoardRemove }
+                                    onBoardDataSelect={ onBoardDataSelect }
+                                    onBoardDataClear={ onBoardDataClear }
+                                    key={ row.boardNumber }
+                                    row={ row }
+                                />)
                             )
                         }
                     </tbody>
@@ -54,7 +75,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         onBoardDataSelect: (i) => dispatch(board_data_select(i)),
         onBoardRemove: (i) => dispatch(board_data_remove(i)),
-        onBoardDataSave: (e) => dispatch(board_data_save(e))
+        onBoardDataSave: (e) => dispatch(board_data_save(e)),
+        onBoardDataClear: (e) => dispatch(board_data_clear(e))
     }
 };
 
