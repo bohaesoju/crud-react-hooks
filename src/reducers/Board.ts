@@ -58,31 +58,29 @@ const board = (state = initialState, action: any): IBoard => {
     let boards = state.boards;
     switch(action.type){
         case BOARD_DATA_SAVE:
-            let data = action.data;
-            let maxNumber = state.maxNumber;
             // if(!data.boardNumber){
                 return{
-                    maxNumber: maxNumber + 1,
+                    maxNumber: state.maxNumber + 1,
                     boards: boards.concat({
-                        ...data,
-                        boardNumber: maxNumber,
+                        ...action.data,
+                        boardNumber: state.maxNumber,
                         boardMakeDate: new Date(),
                         checked: false
                     }),
                     selectedBoard: {}
                 };
-                return {
-                    ...state,
-                    boards: boards.map(row => data.boardNumber === row.boardNumber
-                        ? {
-                            ...data,
-                            checked: false
-                        }
-                        : console.log(row)
-                        // : row
-                    ),
-                    selectedBoard: {}
-                };
+                // return {
+                //     ...state,
+                //     boards: boards.map(row => action.data.boardNumber === row.boardNumber
+                //         ? {
+                //             ...action.data,
+                //             checked: false
+                //         }
+                //         : console.log(row)
+                //         // : row
+                //     ),
+                //     selectedBoard: {}
+                // };
             // }
         case BOARD_DATA_REMOVE:
             return {
@@ -120,6 +118,7 @@ const board = (state = initialState, action: any): IBoard => {
                 selectedBoard: {
                     boardTitle: '',
                     boardWriter: '',
+                    boardNumber: action.boardNumber,
                     checked: false
                 }
             };

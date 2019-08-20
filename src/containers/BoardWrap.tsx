@@ -55,6 +55,7 @@ class BoardWrap extends React.Component<IProps> {
                                     onBoardDataClear={ onBoardDataClear }
                                     key={ row.boardNumber }
                                     row={ row }
+                                    selectedBoard={ Board.selectedBoard }
                                 />)
                             )
                         }
