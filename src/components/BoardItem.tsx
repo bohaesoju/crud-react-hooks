@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Router, Route, Link } from 'react-router-dom';
 
 interface IProps{
     row: any
@@ -19,12 +20,16 @@ export class BoardItem extends React.Component<IProps> {
     };
 
     handleCheckbox = (e, i) => {
-        // console.log(e.target.checked);
+        console.log(i);
         if(e.target.checked === true){
             this.props.onBoardDataSelect(i);
         } else {
             this.props.onBoardDataClear(i)
         }
+    };
+
+    handleViewDetail =(i) => {
+        console.log('detail : ', i)
     };
 
     render(){
@@ -43,7 +48,7 @@ export class BoardItem extends React.Component<IProps> {
                         type="checkbox"
                     />
                 </td>
-                <td><a onClick={ () => this.handleUpdateForm(row.boardNumber) }>{ row.boardTitle }</a></td>
+                <td><Link to="boardview" onClick={ () => this.handleViewDetail(row.boardNumber) }>{ row.boardTitle }</Link></td>
                 <td>{ row.boardWriter }</td>
                 <td>{ row.boardMakeDate.toLocaleDateString('ko-KR') }</td>
                 <td><a onClick={ () => this.handleBoardDataRemove(row.boardNumber) }>삭제</a></td>

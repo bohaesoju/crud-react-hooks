@@ -110,9 +110,10 @@ const board = (state = initialState, action: any): IBoard => {
             return{
                 ...state,
                 boards: state.boards.map((row) => {
-                    row.boardNumber === action.boardNumber
-                        ? boards[row.boardNumber - 1].checked = false
-                        : console.log('clear');
+                    boards[row.boardNumber - 1].checked = false;
+                    // row.boardNumber === action.boardNumber
+                    //     ? boards[row.boardNumber - 1].checked = false
+                    //     : console.log('clear');
                     return row;
                 }),
                 selectedBoard: {
