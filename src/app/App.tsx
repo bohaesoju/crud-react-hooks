@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { BoardView } from '../components';
 import BoardWrap from '../containers/BoardWrap';
 import BoardViewContainer from '../containers/BoardViewContainer';
 
