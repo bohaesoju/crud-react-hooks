@@ -12,16 +12,11 @@ interface IProps{
 
 export class BoardItem extends React.Component<IProps> {
 
-    handleUpdateForm = (i) => {
-        this.props.onBoardDataSelect(i);
-    };
-
     handleBoardDataRemove = (i) => {
         this.props.onBoardRemove(i)
     };
 
     handleCheckbox = (e, i) => {
-        console.log(i);
         if(e.target.checked === true){
             this.props.onBoardDataSelect(i);
         } else {

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import '../style/style.scss';
 import { rootState } from '../reducers/';
 

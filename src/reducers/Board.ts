@@ -94,6 +94,7 @@ const board = (state = initialState, action: any): IBoard => {
                     return row;
                 }),
                 selectedBoard: boards.find(row => row.boardNumber === action.boardNumber)
+                // selectedBoard: boards.find(row => row.boardNumber === action.boardNumber)
             };
         case BOARD_DATA_CLEAR:
             return{
