@@ -8,7 +8,8 @@ import {
     board_data_remove,
     board_data_save,
     board_data_select,
-    board_data_clear
+    board_data_clear,
+    board_data_view,
 } from "../reducers/Board";
 
 interface IProps{
@@ -18,6 +19,7 @@ interface IProps{
     onBoardDataSelect(i: number): void
     onBoardDataSave(e: any): void
     onBoardDataClear(e: any): void
+    onBoardDataView(i: number): void
 }
 
 class BoardWrap extends React.Component<IProps> {
@@ -28,7 +30,8 @@ class BoardWrap extends React.Component<IProps> {
             onBoardRemove,
             onBoardDataSelect,
             onBoardDataSave,
-            onBoardDataClear
+            onBoardDataClear,
+            onBoardDataView,
         } = this.props;
 
         return(
@@ -53,6 +56,7 @@ class BoardWrap extends React.Component<IProps> {
                                     onBoardRemove={ onBoardRemove }
                                     onBoardDataSelect={ onBoardDataSelect }
                                     onBoardDataClear={ onBoardDataClear }
+                                    onBoardDataView={ onBoardDataView }
                                     key={ row.boardNumber }
                                     row={ row }
                                     selectedBoard={ Board.selectedBoard }
@@ -77,7 +81,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         onBoardDataSelect: (i) => dispatch(board_data_select(i)),
         onBoardRemove: (i) => dispatch(board_data_remove(i)),
         onBoardDataSave: (e) => dispatch(board_data_save(e)),
-        onBoardDataClear: (e) => dispatch(board_data_clear(e))
+        onBoardDataClear: (e) => dispatch(board_data_clear(e)),
+        onBoardDataView: (i) => dispatch(board_data_view(i)),
     }
 };
 

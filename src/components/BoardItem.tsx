@@ -7,6 +7,7 @@ interface IProps{
     onBoardDataSelect(e: number): void
     onBoardRemove(e: number): void
     onBoardDataClear(i: number): void
+    onBoardDataView(i: number): void
 }
 
 export class BoardItem extends React.Component<IProps> {
@@ -29,6 +30,7 @@ export class BoardItem extends React.Component<IProps> {
     };
 
     handleViewDetail =(i) => {
+        this.props.onBoardDataView(i);
         console.log('detail : ', i)
     };
 
