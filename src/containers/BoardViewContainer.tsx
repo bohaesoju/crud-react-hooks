@@ -34,12 +34,6 @@ const mapStateToProps = (rootState: rootState) => {
     }
 };
 
-// const mapDispatchToProps = (dispatch: Dispatch) => {
-//     return {
-//
-//     }
-// };
-
 export default connect(
     mapStateToProps,
     null
