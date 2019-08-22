@@ -1,49 +1,38 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { BOARD_DATA_SAVE } from '../reducers/Board';
+import { useEffect, useState } from "react";
 
-interface IProps {
-    onBoardDataSave(e: any): void
-    Board: any
-}
 
-export class BoardForm extends React.Component<IProps> {
-    state = {
-        boardTitle: '',
-        boardWriter: ''
-    };
-    initialSelectedBoard = {
-        boardNumber: '',
-        boardTitle: '',
-        boardWriter: '',
-        boardMakeDate: '',
-    };
+export const BoardForm = () => {
+    const [boardTitle, setBoardTitle] = useState('');
+    const [boardWriter, setBoardWriter] = useState('');
+    const { selectedBoard } = useSelector((state: any) => state.Board);
+    const dispatch = useDispatch();
 
-    componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        if(this.props.Board.selectedBoard !== prevProps.Board.selectedBoard){
-            this.setState(this.props.Board.selectedBoard)
-        }
-    }
+    useEffect(() => {
+        setBoardTitle(selectedBoard.boardTitle),
+        setBoardWriter(selectedBoard.boardWriter)
+    }, [selectedBoard]);
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    };
-
-    handleSave = (e) => {
+    const handleSubmitForm = (e) => {
         e.preventDefault();
-        this.props.onBoardDataSave(this.state);
-        this.setState(this.initialSelectedBoard);
+        dispatch({
+            type: BOARD_DATA_SAVE,
+            data: {
+                boardTitle: boardTitle,
+                boardWriter: boardWriter
+            },
+        });
+        setBoardTitle('');
+        setBoardWriter('');
     };
 
-    render(){
-        return(
-            <>
-                <form onSubmit={ (e) => this.handleSave(e) }>
-                    <input type="text" value={ this.state.boardTitle } name="boardTitle"  onChange={ this.handleChange } placeholder="title" />
-                    <input type="text" value={ this.state.boardWriter} name="boardWriter"  onChange={ this.handleChange } placeholder="name" />
-                    <button onClick={ this.handleSave }>Save</button>
-                </form>
-            </>
-        )
-    }
+    return(
+        <form onSubmit={ (e) => handleSubmitForm(e) }>
+            <input type="text" value={ boardTitle } name="boardTitle"  onChange={ e => setBoardTitle(e.target.value) } placeholder="title" />
+            <input type="text" value={ boardWriter} name="boardWriter"  onChange={ e => setBoardWriter(e.target.value) } placeholder="name" />
+            <button onClick={ handleSubmitForm }>Save</button>
+        </form>
+    )
 };

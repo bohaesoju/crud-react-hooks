@@ -36,10 +36,7 @@ class BoardWrap extends React.Component<IProps> {
 
         return(
             <div>
-                <BoardForm
-                    Board={ Board }
-                    onBoardDataSave={ onBoardDataSave }
-                />
+                <BoardForm />
                 <table className="table">
                     <tbody>
                         <tr>

@@ -1,6 +1,6 @@
 import { IBoard } from './Models';
 
-const BOARD_DATA_SAVE = 'BOARD_DATA_SAVE';
+export const BOARD_DATA_SAVE = 'BOARD_DATA_SAVE';
 const BOARD_DATA_REMOVE = 'BOARD_DATA_REMOVE';
 const BOARD_DATA_SELECT = 'BOARD_DATA_SELECT';
 const BOARD_DATA_CLEAR = 'BOARD_DATA_CLEAR';
@@ -67,7 +67,8 @@ const board = (state = initialState, action: any): IBoard => {
     let boards = state.boards;
     switch(action.type){
         case BOARD_DATA_SAVE:
-                return{
+            console.log(action)
+            return{
                     maxNumber: state.maxNumber + 1,
                     boards: boards.concat({
                         ...action.data,
@@ -94,7 +95,6 @@ const board = (state = initialState, action: any): IBoard => {
                     return row;
                 }),
                 selectedBoard: boards.find(row => row.boardNumber === action.boardNumber)
-                // selectedBoard: boards.find(row => row.boardNumber === action.boardNumber)
             };
         case BOARD_DATA_CLEAR:
             return{
