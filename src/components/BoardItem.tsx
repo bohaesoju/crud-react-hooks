@@ -1,23 +1,52 @@
 import * as React from 'react';
 import { Router, Route, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import {
+    BOARD_DATA_REMOVE,
+    BOARD_DATA_VIEW,
+    BOARD_DATA_SELECT,
+    BOARD_DATA_CLEAR
+} from '../reducers/Board';
 
 interface IProps{
     row: any
-    selectedBoard: any
-    onBoardDataSelect(e: number): void
-    onBoardRemove(e: number): void
-    onBoardDataClear(i: number): void
-    onBoardDataView(i: number): void
 }
 
 export const BoardItem = ({
-                              onBoardRemove,
                               row,
-                              selectedBoard,
-                              onBoardDataSelect,
-                              onBoardDataClear,
-                              onBoardDataView
                           }: IProps) => {
+
+    const { selectedBoard } = useSelector((state: any) => state.Board);
+    const dispatch = useDispatch();
+
+    const onBoardRemove = (e) => {
+        dispatch({
+            type: BOARD_DATA_REMOVE,
+            boardNumber: e
+        })
+    };
+
+    const onBoardDataView = (e) => {
+        dispatch({
+            type: BOARD_DATA_VIEW,
+            boardNumber: e
+        })
+    };
+
+    const onBoardDataSelect = (e) => {
+        dispatch({
+            type: BOARD_DATA_SELECT,
+            boardNumber: e,
+        })
+    };
+
+    const onBoardDataClear = (e) => {
+        dispatch({
+            type: BOARD_DATA_CLEAR,
+            boardNumber: e,
+        })
+    };
+
     const handleCheckbox= (e, i) => {
         if(e.target.checked === true){
             onBoardDataSelect(i);

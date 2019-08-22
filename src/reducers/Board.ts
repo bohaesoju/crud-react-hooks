@@ -1,45 +1,10 @@
 import { IBoard } from './Models';
 
 export const BOARD_DATA_SAVE = 'BOARD_DATA_SAVE';
-const BOARD_DATA_REMOVE = 'BOARD_DATA_REMOVE';
-const BOARD_DATA_SELECT = 'BOARD_DATA_SELECT';
-const BOARD_DATA_CLEAR = 'BOARD_DATA_CLEAR';
-const BOARD_DATA_VIEW = 'BOARD_DATA_VIEW';
-
-export const board_data_save = (data) => {
-    return {
-        type: BOARD_DATA_SAVE,
-        data
-    }
-};
-
-export const board_data_remove = (boardNumber) => {
-    return{
-        type: BOARD_DATA_REMOVE,
-        boardNumber
-    }
-};
-
-export const board_data_select = (boardNumber) => {
-    return{
-        type: BOARD_DATA_SELECT,
-        boardNumber
-    }
-};
-
-export const board_data_clear = (boardNumber) => {
-    return{
-        type: BOARD_DATA_CLEAR,
-        boardNumber
-    }
-};
-
-export const board_data_view = (boardNumber) => {
-    return{
-        type: BOARD_DATA_VIEW,
-        boardNumber
-    }
-};
+export const BOARD_DATA_REMOVE = 'BOARD_DATA_REMOVE';
+export const BOARD_DATA_SELECT = 'BOARD_DATA_SELECT';
+export const BOARD_DATA_CLEAR = 'BOARD_DATA_CLEAR';
+export const BOARD_DATA_VIEW = 'BOARD_DATA_VIEW';
 
 const initialState: IBoard = {
     maxNumber: 3,
@@ -67,7 +32,6 @@ const board = (state = initialState, action: any): IBoard => {
     let boards = state.boards;
     switch(action.type){
         case BOARD_DATA_SAVE:
-            console.log(action)
             return{
                     maxNumber: state.maxNumber + 1,
                     boards: boards.concat({
