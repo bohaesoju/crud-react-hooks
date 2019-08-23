@@ -17,15 +17,19 @@ export const BoardForm = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        dispatch({
-            type: BOARD_DATA_SAVE,
-            data: {
-                boardTitle: boardTitle,
-                boardWriter: boardWriter
-            },
-        });
-        setBoardTitle('');
-        setBoardWriter('');
+        if((boardTitle === undefined || boardTitle === '') || (boardWriter === '' || boardWriter === undefined)){
+            alert('제목 혹은 이름을 입력해주세요!')
+        } else {
+            dispatch({
+                type: BOARD_DATA_SAVE,
+                data: {
+                    boardTitle: boardTitle,
+                    boardWriter: boardWriter
+                },
+            });
+            setBoardTitle('');
+            setBoardWriter('');
+        }
     };
 
     return(

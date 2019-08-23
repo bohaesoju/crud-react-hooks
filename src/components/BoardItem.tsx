@@ -16,7 +16,7 @@ export const BoardItem = ({
                               row,
                           }: IProps) => {
 
-    const { selectedBoard } = useSelector((state: any) => state.Board);
+    const { selectedBoard, boards } = useSelector((state: any) => state.Board);
     const dispatch = useDispatch();
 
     const onBoardRemove = (e) => {
@@ -60,11 +60,12 @@ export const BoardItem = ({
             <td>
                 <input
                     onChange={ (e) => handleCheckbox(e, row.boardNumber) }
-                    checked={
-                        selectedBoard.boardNumber === row.boardNumber
-                            ? selectedBoard.checked
-                            : ''
-                    }
+                    checked={ row.checked }
+                    // checked={
+                    //     selectedBoard.boardNumber === row.boardNumber
+                    //         ? selectedBoard.checked
+                    //         : ''
+                    // }
                     type="checkbox"
                 />
             </td>

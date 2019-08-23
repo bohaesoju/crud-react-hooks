@@ -33,16 +33,17 @@ const board = (state = initialState, action: any): IBoard => {
     switch(action.type){
         case BOARD_DATA_SAVE:
             return{
-                    maxNumber: state.maxNumber + 1,
-                    boards: boards.concat({
-                        ...action.data,
-                        boardNumber: state.maxNumber,
-                        boardMakeDate: new Date(),
-                        checked: false
-                    }),
-                    selectedBoard: {},
-                    viewDetail: []
-                };
+                ...state,
+                maxNumber: state.maxNumber + 1,
+                boards: boards.concat({
+                    ...action.data,
+                    boardNumber: state.maxNumber,
+                    boardMakeDate: new Date(),
+                    checked: false
+                }),
+                selectedBoard: {},
+                viewDetail: []
+            };
         case BOARD_DATA_REMOVE:
             return {
                 ...state,
@@ -55,7 +56,7 @@ const board = (state = initialState, action: any): IBoard => {
                 boards: state.boards.map((row) => {
                     row.boardNumber === action.boardNumber
                         ? boards[row.boardNumber - 1].checked = true
-                        : console.log('select');
+                        : boards[row.boardNumber - 1].checked = false
                     return row;
                 }),
                 selectedBoard: boards.find(row => row.boardNumber === action.boardNumber)
